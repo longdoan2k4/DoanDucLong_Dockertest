@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự Án Spring Boot & Docker của Rhey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        /* Phần Header HUTECH */
+        header {
+            background-color: #0056b3; /* Xanh lam HUTECH */
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 5px solid #cc2027; /* Đỏ HUTECH */
+        }
+        header .logo-box {
+            font-size: 30px;
+            font-weight: 800;
+            background-color: white;
+            color: #0056b3;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        header .title-box {
+            text-align: left;
+        }
+        header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        header p {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Phần Nội dung chính */
+        main {
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Phần Hero (Biểu tượng Docker & Tiêu đề) */
+        .hero {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 30px;
+            border: 2px solid #e1e8f0;
+        }
+        .hero .docker-icon {
+            font-size: 80px;
+            color: #0db7ed; /* Xanh Docker */
+            margin-bottom: 20px;
+        }
+        .hero h2 {
+            font-size: 30px;
+            margin: 0;
+            color: #0056b3;
+        }
+        .hero p {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #7f8c8d;
+        }
+
+        /* Phần Các thẻ thông tin */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .info-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid #e1e8f0;
+        }
+        .info-card h3 {
+            font-size: 18px;
+            color: #0056b3;
+            margin: 0 0 10px 0;
+        }
+        .info-card p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        /* Nút Kêu gọi hành động */
+        .cta-button {
+            background-color: #0db7ed;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 40px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #0a8fba;
+        }
+
+        /* Phần Footer HUTECH */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            border-top: 10px solid;
+            border-image: linear-gradient(to right, #cc2027 50%, #0056b3 50%) 1;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer .slogan {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo-box">H</div>
+    <div class="title-box">
+        <h1>Đại học Công nghệ TP.HCM</h1>
+        <p>HUTECH University</p>
+    </div>
+</header>
+
+<main>
+    <div class="hero">
+        <div class="docker-icon">🐳</div>
+        <h2>Dự Án: Spring Boot Dockerized</h2>
+        <p>Xin chào Rhey! Trang chủ này đã được nâng cấp thành một giao diện đẹp hơn, hiện đại hơn và chuyên nghiệp hơn.</p>
+    </div>
+
+    <div class="info-cards">
+        <div class="info-card">
+            <h3>Xây Dựng Ứng Dụng</h3>
+            <p>Tạo dự án Spring Boot và giao diện web static.</p>
+        </div>
+        <div class="info-card">
+            <h3>Cấu Hình Docker</h3>
+            <p>Đóng gói ứng dụng thành một Docker Image.</p>
+        </div>
+        <div class="info-card">
+            <h3>CI/CD Hoàn Tất</h3>
+            <p>Tự động hóa với GitHub Secrets và file deploy.yml.</p>
+        </div>
+    </div>
+
+    <a href="/api/hello" class="cta-button">Kiểm tra API (/api/hello)</a>
+</main>
+
+<footer>
+    <p class="slogan">TRI THỨC – ĐẠO ĐỨC – SÁNG TẠO</p>
+    <p>Học phần: Thực hành Công nghệ Phần mềm</p>
+    <p>Thực hiện: Rhey | Trang 25</p>
+</footer>
+</body>
+</html>
