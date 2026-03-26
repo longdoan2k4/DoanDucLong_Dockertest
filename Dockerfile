@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM bellsoft/liberica-openjdk-alpine:25
 LABEL authors="longdoan"
 WORKDIR /app
 
