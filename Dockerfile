@@ -1,15 +1,15 @@
-# Giai đoạn 1: Build ứng dụng (Sử dụng Maven và JDK 25)
-FROM maven:3.9.9-eclipse-temurin-21 AS build
-# Lưu ý: Hiện tại Maven image hỗ trợ ổn định nhất là temurin-21,
-# nó vẫn build được code Java 25 nếu bạn cấu hình đúng trong pom.xml
+FROM bellsoft/liberica-openjdk-alpine:25 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+# Cấp quyền chạy cho file mvnw (tránh lỗi permission denied)
+RUN chmod +x mvnw
+# Build file jar
+RUN ./mvnw clean package -DskipTests
 
-# Giai đoạn 2: Chạy ứng dụng (Chỉ cần JRE nhẹ)
-FROM eclipse-temurin:21-jre-alpine
+# Giai đoạn 2: Chạy ứng dụng
+FROM bellsoft/liberica-openjdk-alpine:25
 WORKDIR /app
-# Copy file .jar từ giai đoạn build sang
+# Lấy file jar đã build từ giai đoạn 1 sang
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
