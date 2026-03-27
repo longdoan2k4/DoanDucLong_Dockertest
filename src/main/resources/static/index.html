@@ -3,190 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dự Án Spring Boot & Docker của Rhey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Đoàn Đức Long | Modern Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #007bff;   /* Xanh lam chuyên nghiệp */
+            --primary-light: #e6f2ff;
+            --secondary: #2c3e50; /* Xanh đậm */
+            --accent: #cc2027;    /* Đỏ điểm nhấn HUTECH */
+            --bg-body: #f8fafc;   /* Nền xám nhạt */
+            --text-main: #333;
+            --text-muted: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Urbanist', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             margin: 0;
-            color: #2c3e50;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* Phần Header HUTECH */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Header: Tên và Thông tin liên hệ --- */
         header {
-            background-color: #0056b3; /* Xanh lam HUTECH */
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 5px solid #cc2027; /* Đỏ HUTECH */
-        }
-        header .logo-box {
-            font-size: 30px;
-            font-weight: 800;
-            background-color: white;
-            color: #0056b3;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-        header .title-box {
-            text-align: left;
-        }
-        header h1 {
-            font-size: 20px;
-            margin: 0;
-        }
-        header p {
-            font-size: 14px;
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        /* Phần Nội dung chính */
-        main {
-            padding: 50px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Phần Hero (Biểu tượng Docker & Tiêu đề) */
-        .hero {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 700px;
-            margin-bottom: 30px;
-            border: 2px solid #e1e8f0;
-        }
-        .hero .docker-icon {
-            font-size: 80px;
-            color: #0db7ed; /* Xanh Docker */
-            margin-bottom: 20px;
-        }
-        .hero h2 {
-            font-size: 30px;
-            margin: 0;
-            color: #0056b3;
-        }
-        .hero p {
-            font-size: 18px;
-            margin: 15px 0;
-            color: #7f8c8d;
-        }
-
-        /* Phần Các thẻ thông tin */
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-        }
-        .info-card {
+            margin-bottom: 60px;
+            padding: 40px 20px;
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            text-align: center;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             border: 1px solid #e1e8f0;
         }
-        .info-card h3 {
-            font-size: 18px;
-            color: #0056b3;
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -2px;
+            /* Hiệu ứng chữ gradient chuyển màu */
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header p.title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 0 0 20px 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .contact-info span { position: relative; }
+        .contact-info span:not(:last-child)::after {
+            content: "•";
+            color: #bdc3c7;
+            position: absolute;
+            right: -15px;
+        }
+
+        /* --- Cấu trúc các Mục chính --- */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Bố cục Grid cho Thông tin & Kỹ năng --- */
+        .info-skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* --- Thông tin cá nhân & Học vấn --- */
+        .info-section, .edu-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e1e8f0;
+        }
+
+        .info-list p, .edu-item p { margin: 0 0 10px 0; font-size: 15px; }
+        .edu-item h4 { font-size: 16px; font-weight: 700; margin: 0 0 5px 0; }
+        .edu-item p.gpa { font-weight: 700; color: var(--primary); }
+
+        /* --- Mục Dự án Cá Nhân (Thẻ) --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e1e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+        }
+
+        .project-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
             margin: 0 0 10px 0;
         }
-        .info-card p {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin: 0;
-        }
 
-        /* Nút Kêu gọi hành động */
-        .cta-button {
-            background-color: #0db7ed;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 40px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .cta-button:hover {
-            background-color: #0a8fba;
-        }
-
-        /* Phần Footer HUTECH */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            font-size: 14px;
-            border-top: 10px solid;
-            border-image: linear-gradient(to right, #cc2027 50%, #0056b3 50%) 1;
-        }
-        footer p {
-            margin: 5px 0;
-        }
-        footer .slogan {
-            font-weight: 600;
-            font-size: 16px;
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
+        }
+
+        .project-card-date {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .project-card-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .project-card ul {
+            font-size: 14px;
+            color: var(--text-main);
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .project-card ul li { margin-bottom: 5px; }
+
+        /* --- Mục Kỹ năng (Thẻ tag) --- */
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid #d1e9ff;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        /* --- Responsive cho thiết bị di động --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 36px; }
+            .info-skills-grid { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 10px; }
+            .contact-info span::after { display: none; }
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="logo-box">H</div>
-    <div class="title-box">
-        <h1>Đại học Công nghệ TP.HCM</h1>
-        <p>HUTECH University</p>
-    </div>
-</header>
 
-<main>
-    <div class="hero">
-        <div class="docker-icon">🐳</div>
-        <h2>Dự Án: Spring Boot Dockerized</h2>
-        <p>Xin chào Rhey! Trang chủ này đã được nâng cấp thành một giao diện đẹp hơn, hiện đại hơn và chuyên nghiệp hơn.</p>
-    </div>
-
-    <div class="info-cards">
-        <div class="info-card">
-            <h3>Xây Dựng Ứng Dụng</h3>
-            <p>Tạo dự án Spring Boot và giao diện web static.</p>
+<div class="container">
+    <header>
+        <h1>ĐOÀN ĐỨC LONG</h1>
+        <p class="title">Software Engineer Intern | Flutter | Spring Boot</p>
+        <div class="contact-info">
+            <span>📞 0356743140</span>
+            <span>📧 longdoanduc2004@gmail.com</span>
+            <span>📍 TP.HCM</span>
         </div>
-        <div class="info-card">
-            <h3>Cấu Hình Docker</h3>
-            <p>Đóng gói ứng dụng thành một Docker Image.</p>
-        </div>
-        <div class="info-card">
-            <h3>CI/CD Hoàn Tất</h3>
-            <p>Tự động hóa với GitHub Secrets và file deploy.yml.</p>
-        </div>
+    </header>
+
+    <div class="info-skills-grid">
+        <section class="info-section" id="thong-tin-ca-nhan">
+            <h2>Giới Thiệu</h2>
+            <div class="info-list">
+                <p>Tôi là sinh viên năm cuối chuyên ngành Kỹ thuật phần mềm tại HUTECH, với đam mê phát triển ứng dụng di động và web.</p>
+                <p>Tôi có nền tảng vững chắc về Java, Flutter và kinh nghiệm thực tế qua các dự án cá nhân Full-stack.</p>
+            </div>
+        </section>
+
+        <section class="info-section" id="ky-nang">
+            <h2>Kỹ Năng</h2>
+            <ul class="skill-list">
+                <li class="skill-tag">Java / Spring Boot / Docker</li>
+                <li class="skill-tag">Flutter / Dart / SQLite</li>
+                <li class="skill-tag">Git & CI/CD (GitHub Actions)</li>
+                <li class="skill-tag">PHP / MySQL / SQL Server</li>
+                <li class="skill-tag">HTML/CSS/JS</li>
+                <li class="skill-tag">RESTful APIs</li>
+            </ul>
+        </section>
     </div>
 
-    <a href="/api/hello" class="cta-button">Kiểm tra API (/api/hello)</a>
-</main>
+    <section id="kinh-nghiem">
+        <h2>Dự Án Cá Nhân Tiêu Biểu</h2>
+        <div class="project-grid">
 
-<footer>
-    <p class="slogan">TRI THỨC – ĐẠO ĐỨC – SÁNG TẠO</p>
-    <p>Học phần: Thực hành Công nghệ Phần mềm</p>
-    <p>Thực hiện: Rhey | Trang 25</p>
-</footer>
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>DiDongStore</h3>
+                    <div class="project-card-date">2023</div>
+                </div>
+                <p class="project-card-subtitle">Website thương mại điện tử | PHP & MySQL</p>
+                <ul>
+                    <li>Xây dựng giao diện responsive với kiến trúc MVC.</li>
+                    <li>Tích hợp các tính năng thanh toán bảo mật và Google OAuth.</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Finance Manager</h3>
+                    <div class="project-card-date">2024</div>
+                </div>
+                <p class="project-card-subtitle">Ứng dụng Mobile quản lý tài chính | Flutter & SQLite</p>
+                <ul>
+                    <li>Phát triển ứng dụng quản lý thu chi, nợ và báo cáo tài chính.</li>
+                    <li>Sử dụng Provider pattern cho quản lý trạng thái mượt mà.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="edu-section" id="hoc-van">
+        <h2>Học Vấn</h2>
+        <div class="edu-item">
+            <h4>Đại học Công nghệ TP.HCM (HUTECH)</h4>
+            <p>Kỹ thuật phần mềm (Niên khóa: 2022 - 2026)</p>
+            <p class="gpa">GPA: 3.0/4.0</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>CV Online được xây dựng bằng Spring Boot & Dockerized với GitHub Actions | Thực hiện: Đoàn Đức Long</p>
+    </footer>
+</div>
+
 </body>
 </html>
