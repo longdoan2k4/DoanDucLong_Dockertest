@@ -1,12 +1,15 @@
-FROM bellsoft/liberica-openjdk-alpine:25
-LABEL authors="longdoan"
+# Giai đoạn 1: Build ứng dụng (Sử dụng Maven và JDK 25)
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+# Lưu ý: Hiện tại Maven image hỗ trợ ổn định nhất là temurin-21,
+# nó vẫn build được code Java 25 nếu bạn cấu hình đúng trong pom.xml
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy file .jar (sau khi build) vào trong Docker
-COPY target/*.jar app.jar
-
-# Mở cổng 8080 (cổng mặc định của Spring Boot)
+# Giai đoạn 2: Chạy ứng dụng (Chỉ cần JRE nhẹ)
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+# Copy file .jar từ giai đoạn build sang
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Lệnh chạy ứng dụng khi Docker khởi động
 ENTRYPOINT ["java", "-jar", "app.jar"]

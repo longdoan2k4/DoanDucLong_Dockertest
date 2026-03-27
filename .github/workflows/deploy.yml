@@ -2,58 +2,39 @@ name: CI/CD Push to Docker Hub
 
 on:
   push:
-    branches: [ "main" ] # Tự động chạy khi có code mới đẩy lên nhánh main
+    branches: [ "main" ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # --- ROBOT 1: Lấy code từ GitHub về ---
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # --- BƯỚC ĐỆM BẮT BUỘC: Build mã nguồn Spring Boot ---
-      - name: Set up JDK 25
-        uses: actions/setup-java@v3
-        with:
-          java-version: '25'
-          distribution: 'temurin'
-
-      - name: Build with Maven
-        run: mvn clean package -DskipTests
-
-      # --- ROBOT 2: Đăng nhập Docker Hub (Sử dụng 2 Secret bạn vừa tạo) ---
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # --- ROBOT 3: Đóng gói Docker và Đẩy lên Hub ---
+      # Robot này sẽ gọi Dockerfile ở trên để tự Build và Push
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          # LƯU Ý: Bạn có thể đổi chữ "bai-tap-spring-boot" thành tên bất kỳ bạn muốn
           tags: ${{ secrets.DOCKER_USERNAME }}/bai-tap-spring-boot:latest
 
       - name: Triển khai lên DevOps Classroom
         run: |
           REPO="doanduclong1744/bai-tap-spring-boot"
-          CONTAINER_PORT=80
+          CONTAINER_PORT=8080 # Spring Boot mặc định chạy 8080, hãy khớp với EXPOSE
           RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST "${{ secrets.DEPLOY_URL }}?repo=$REPO&tag=latest&slot=3&container_port=$CONTAINER_PORT&strict_container_port=0")
-          BODY=$(echo "$RESPONSE" | sed "$d")
+          BODY=$(echo "$RESPONSE" | sed '$d')
           CODE=$(echo "$RESPONSE" | tail -n1)
           echo "Webhook HTTP: $CODE"
           if [ "$CODE" -lt 200 ] || [ "$CODE" -ge 300 ]; then
-            echo "Deploy thất bại. Xem chi tiết trong nhóm log bên dưới."
-            echo "::group::Chi tiết webhook JSON"
-            echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
-            echo "::endgroup::"
+            echo "Deploy thất bại."
             exit 1
           fi
           echo "Deploy thành công."
-          echo "::group::Chi tiết webhook JSON"
-          echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
-          echo "::endgroup::"
